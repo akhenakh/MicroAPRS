@@ -11,14 +11,14 @@
 # Programmer type
 # see local pgm_config.mk for programmer customization.
 
-OPTCFLAGS = -ffunction-sections -fdata-sections
+OPTCFLAGS = -ffunction-sections -fdata-sections -Os -fno-inline-small-functions -mrelax -nostartfiles
 #OPTCFLAGS = -funsafe-loop-optimizations
 
 # For AVRStudio
 #DEBUGCFLAGS = -gdwarf-2
 
 # For GDB
-DEBUGCFLAGS = -ggdb
+#DEBUGCFLAGS = -ggdb
 
 #
 # define some variables based on the AVR base path in $(AVR)
