@@ -30,7 +30,7 @@ void hw_afsk_adcInit(int ch, Afsk *_modem)
 
     // Also make sure that we are not trying to use
     // a pin that can't be used for analog input
-    ASSERT(ch <= 5);
+    ASSERT(ch <= 7);
 
     // We need a timer to control how often our sampling functions
     // should run. To do this we will need to change some registers.

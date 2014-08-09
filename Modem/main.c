@@ -35,7 +35,7 @@ static Afsk afsk;           // Declare a AFSK modem struct
 static AX25Ctx ax25;        // Declare a protocol struct
 static Serial ser;          // Declare a serial interface struct
 
-#define ADC_CH 0            // Define which channel (pin) we want
+#define ADC_CH 7            // Define which channel (pin) we want
                             // for the ADC (this is A0 on arduino)
 
 
