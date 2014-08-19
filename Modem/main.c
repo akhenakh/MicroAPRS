@@ -78,7 +78,7 @@ static void init(void)
     // Initialize serial comms on UART0,
     // which is the hardware serial on arduino
     ser_init(&ser, SER_UART0);
-    ser_setbaudrate(&ser, 9600);
+    ser_setbaudrate(&ser, 115200);
 
     // For some reason BertOS sets the serial
     // to 7 bit characters by default. We set

@@ -173,25 +173,22 @@ void ss_saveSettings(void) {
 }
 
 void ss_messageCallback(struct AX25Msg *msg, Serial *ser) {
-    if (PRINT_SRC) {
-        if (PRINT_INFO) kfile_print(&ser->fd, "SRC: ");
-        kfile_printf(&ser->fd, "[%.6s-%d] ", msg->src.call, msg->src.ssid);
-    }
-    if (PRINT_DST) {
-        if (PRINT_INFO) kfile_printf(&ser->fd, "DST: ");
-        kfile_printf(&ser->fd, "[%.6s-%d] ", msg->dst.call, msg->dst.ssid);
-    }
+    kfile_print(&ser->fd, "A");
+    kfile_printf(&ser->fd, "%.6s-%d>", msg->src.call, msg->src.ssid);
+    kfile_printf(&ser->fd, "%.6s-%d,", msg->dst.call, msg->dst.ssid);
+    
 
-    if (PRINT_PATH) {
-        if (PRINT_INFO) kfile_print(&ser->fd, "PATH: ");
-        for (int i = 0; i < msg->rpt_cnt; i++)
-            kfile_printf(&ser->fd, "[%.6s-%d] ", msg->rpt_lst[i].call, msg->rpt_lst[i].ssid);
+
+    for (int i = 0; i < msg->rpt_cnt; i++) {
+        if (i == msg->rpt_cnt -1) {
+            kfile_printf(&ser->fd, "%.6s-%d", msg->rpt_lst[i].call, msg->rpt_lst[i].ssid);
+        } else {
+            kfile_printf(&ser->fd, "%.6s-%d,", msg->rpt_lst[i].call, msg->rpt_lst[i].ssid);
+        }
     }
     
-    if (PRINT_DATA) {
-        if (PRINT_INFO) kfile_print(&ser->fd, "DATA: ");
-        kfile_printf(&ser->fd, "%.*s", msg->len, msg->info);
-    }
+    kfile_print(&ser->fd, ":");
+    kfile_printf(&ser->fd, "%.*s", msg->len, msg->info);
     kfile_print(&ser->fd, "\r\n");
 
     if (message_autoAck && msg->len > 11) {
